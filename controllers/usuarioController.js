@@ -23,6 +23,24 @@ exports.obtenerUsuarios = async (req, res) => {
 };
 
 ///Actualizar usuario
-
+exports.actualizarUsuario = async (req, res) => {
+    try {
+        const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.id, req.bod, {new : true});
+        res.status(200).json(usuarioActualizado);
+    }catch(error){
+        res.status(400).json({error: error.message});
+    }
+};
 
 // Eliminar usuario
+exports.eliminarUsuario = async (req, res) => {
+    try {
+         await Usuario.findByIdAndDelete(req.params.id);
+        res.status(200).json({mensaje: "Usuario eliminado"});
+    }catch(error){
+        res.status(400).json({error: error.message});
+    }
+};
+
+
+
